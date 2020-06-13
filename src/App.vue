@@ -1,21 +1,27 @@
 <template>
-  <div id="app">{{ message }}</div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<DraggableTodoList
+					listName="todoList"
+					shareGroup="group1"
+				></DraggableTodoList>
+			</div>
+			<div class="col">
+				<DraggableTodoList
+					listName="completedList"
+					shareGroup="group1"
+				></DraggableTodoList>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
+import draggable from 'vuedraggable';
+import DraggableTodoList from './DraggableTodoList.vue';
+
 export default {
-  data() {
-    return {
-      message: "Hello World"
-    };
-  }
+	components: { draggable, DraggableTodoList },
 };
 </script>
-
-<style>
-#app {
-  font-size: 18px;
-  font-family: "Roboto", sans-serif;
-  color: blue;
-}
-</style>
