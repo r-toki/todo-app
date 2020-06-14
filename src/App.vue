@@ -2,16 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <DraggableTodoList
-          listName="todoList"
-          shareGroup="group1"
-        ></DraggableTodoList>
+        <DraggableTodoList listName="todoList" shareLists="todo-completed"></DraggableTodoList>
       </div>
       <div class="col">
-        <DraggableTodoList
-          listName="completedList"
-          shareGroup="group1"
-        ></DraggableTodoList>
+        <DraggableTodoList listName="completedList" shareLists="todo-completed"></DraggableTodoList>
       </div>
     </div>
   </div>

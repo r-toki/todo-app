@@ -1,10 +1,21 @@
 <template>
-  <div class="root bg-light">
+  <div class="draggable-todo-list bg-light">
     <h3>{{ listName }}</h3>
+    <template v-if="isAbleToAddElement">
+      <div class="form-group">
+        <input
+          v-model="newTodo"
+          class="form-control"
+          type="text"
+          placeholder="What needs to be done?"
+          @keyup.enter="addTodo"
+        />
+      </div>
+    </template>
     <draggable
       class="list-group"
       :list="$store.state[listName]"
-      group="shareGroup"
+      group="shareLists"
       ghost-class="ghost"
     >
       <div
@@ -27,18 +38,29 @@
 import draggable from 'vuedraggable';
 
 export default {
-  props: ['listName', 'shareGroup'],
+  props: ['listName', 'shareLists'],
   components: { draggable },
+  data() {
+    return { newTodo: '' };
+  },
   methods: {
     removeAt(idx) {
       this.$store.state[this.listName].splice(idx, 1);
+    },
+    addTodo() {
+      this.$store.state[this.listName].push({ name: this.newTodo, id: new Date().getTime() });
+    },
+  },
+  computed: {
+    isAbleToAddElement() {
+      return this.listName === 'todoList';
     },
   },
 };
 </script>
 
 <style scoped>
-.root {
+.draggable-todo-list {
   padding: 0 1rem 1rem;
 }
 
