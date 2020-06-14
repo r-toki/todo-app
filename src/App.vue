@@ -2,20 +2,19 @@
   <div class="container">
     <div class="row">
       <div class="col">
-        <DraggableTodoList listName="todoList" shareLists="todo-completed"></DraggableTodoList>
+        <DraggableList listName="todoList" shareLists="todo-completed"></DraggableList>
       </div>
       <div class="col">
-        <DraggableTodoList listName="completedList" shareLists="todo-completed"></DraggableTodoList>
+        <DraggableList listName="completedList" shareLists="todo-completed"></DraggableList>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable';
-import DraggableTodoList from './DraggableTodoList.vue';
+import DraggableList from './DraggableList.vue';
 
 export default {
-  components: { draggable, DraggableTodoList },
+  components: { DraggableList },
 };
 </script>
