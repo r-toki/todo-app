@@ -1,21 +1,28 @@
 <template>
-  <div class="draggable-list bg-light">
-    <h3>{{ listName }}</h3>
-    <template v-if="isAbleToAdd">
+  <div class="draggable-list-root">
+    <div class="title-area">
+      <h4>{{ listName }}</h4>
+    </div>
+    <div class="add-area">
       <input
-        v-model="newTodo"
+        v-model="newTaskTitle"
         class="form-control"
         type="text"
-        placeholder="What needs to be done?"
-        @keyup.enter="addTodo"
+        placeholder="Add task"
+        @keyup.enter="addTask"
       />
-    </template>
-    <draggable class="list-group" v-model="vuexList" group="shareLists" ghost-class="ghost">
-      <div class="list-group-item" v-for="(element, idx) in vuexList" :key="element.id">
+    </div>
+    <draggable
+      class="list-group draggable-area"
+      v-model="vuexList"
+      group="shareLists"
+      ghost-class="ghost"
+    >
+      <div class="list-group-item task-area" v-for="(task, idx) in vuexList" :key="task.id">
         <div class="flex-container">
-          <div class="flex-item">{{ element.title }}</div>
+          <div class="flex-item">{{ task.title }}</div>
           <div class="flex-item">
-            <i class="fa fa-times close" @click="removeAt(idx)"></i>
+            <i class="fa fa-times close" @click="removeTask(idx)"></i>
           </div>
         </div>
       </div>
@@ -31,7 +38,7 @@ export default {
   components: { draggable },
   data() {
     return {
-      newTodo: '',
+      newTaskTitle: '',
     };
   },
   computed: {
@@ -43,16 +50,13 @@ export default {
         this.$store.commit('setList', { list: updatedList, listName: this.listName });
       },
     },
-    isAbleToAdd() {
-      return this.listName === 'todoList';
-    },
   },
   methods: {
-    removeAt(idx) {
+    removeTask(idx) {
       this.$store.commit('removeElement', { listName: this.listName, idx: idx });
     },
-    addTodo() {
-      const value = this.newTodo && this.newTodo.trim();
+    addTask() {
+      const value = this.newTaskTitle && this.newTaskTitle.trim();
       if (!value) {
         return;
       }
@@ -60,15 +64,32 @@ export default {
         listName: this.listName,
         element: { title: value, id: new Date().getTime() },
       });
-      this.newTodo = '';
+      this.newTaskTitle = '';
     },
   },
 };
 </script>
 
 <style scoped>
-.draggable-list {
-  padding: 0 1rem 1rem;
+.draggable-list-root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-area {
+  margin-bottom: 0.5rem;
+}
+
+.add-area {
+  margin-bottom: 0.5rem;
+}
+
+.draggable-area {
+  flex-grow: 1;
+}
+
+.task-area {
 }
 
 .ghost {
