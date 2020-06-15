@@ -24,9 +24,9 @@ const mutations = {
   removeElement(state, { listName, idx }) {
     state[listName].splice(idx, 1);
   },
-  // listName | element
-  addElement(state, { listName, element }) {
-    state[listName].push(element);
+  // listName, idx | element
+  addElement(state, { listName, idx, element }) {
+    state[listName].splice(idx, 0, element);
   },
 };
 

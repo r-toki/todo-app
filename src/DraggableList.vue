@@ -1,7 +1,7 @@
 <template>
   <div class="draggable-list-root">
     <div class="title-area">
-      <h4>{{ listName }}</h4>
+      <h4>{{ title }}</h4>
     </div>
     <div class="add-area">
       <input
@@ -20,6 +20,9 @@
     >
       <div class="list-group-item task-area" v-for="(task, idx) in vuexList" :key="task.id">
         <div class="flex-container">
+          <div class="flex-item">
+            <input type="checkbox" />
+          </div>
           <div class="flex-item">{{ task.title }}</div>
           <div class="flex-item">
             <i class="fa fa-times close" @click="removeTask(idx)"></i>
@@ -42,6 +45,10 @@ export default {
     };
   },
   computed: {
+    title() {
+      const titleList = { todoList: 'To do', completedList: 'Completed' };
+      return titleList[this.listName] || 'No Title';
+    },
     vuexList: {
       get() {
         return this.$store.state[this.listName];
@@ -62,6 +69,7 @@ export default {
       }
       this.$store.commit('addElement', {
         listName: this.listName,
+        idx: 0,
         element: { title: value, id: new Date().getTime() },
       });
       this.newTaskTitle = '';
@@ -110,12 +118,12 @@ export default {
   display: flex;
 }
 
-.task-area .flex-item:nth-child(1) {
+.task-area .flex-item:nth-child(2) {
   flex-grow: 1;
   overflow: hidden;
 }
 
-.task-area .flex-item:nth-child(2) > i {
+.task-area .flex-item:nth-child(3) > i {
   font-size: 1.5rem;
 }
 </style>
