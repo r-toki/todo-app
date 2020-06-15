@@ -47,7 +47,7 @@ export default {
         return this.$store.state[this.listName];
       },
       set(updatedList) {
-        this.$store.commit('setList', { list: updatedList, listName: this.listName });
+        this.$store.commit('setList', { listName: this.listName, list: updatedList });
       },
     },
   },

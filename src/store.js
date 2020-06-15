@@ -15,12 +15,16 @@ const state = {
 };
 
 const mutations = {
-  setList(state, { list, listName }) {
+  // for specify | for update
+  // listName | list
+  setList(state, { listName, list }) {
     state[listName] = list;
   },
+  // listName, idx |
   removeElement(state, { listName, idx }) {
     state[listName].splice(idx, 1);
   },
+  // listName | element
   addElement(state, { listName, element }) {
     state[listName].push(element);
   },

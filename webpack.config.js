@@ -17,7 +17,7 @@ module.exports = {
     ],
   },
   devServer: {
-    open: true,
+    open: 'Google Chrome',
     // hot: true,
   },
   plugins: [

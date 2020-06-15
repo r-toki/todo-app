@@ -36,4 +36,8 @@ body {
 .app-root .row .col {
   height: 100%;
 }
+
+.app-root {
+  max-width: 960px;
+}
 </style>
