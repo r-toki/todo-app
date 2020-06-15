@@ -78,7 +78,6 @@ export default {
 }
 
 .title-area {
-  margin-bottom: 0.5rem;
 }
 
 .add-area {
@@ -90,6 +89,16 @@ export default {
 }
 
 .task-area {
+  margin-bottom: 0.25rem;
+  cursor: pointer;
+}
+
+.list-group-item {
+  border-radius: inherit !important;
+}
+
+.list-group-item + .list-group-item {
+  border-top-width: 1px !important;
 }
 
 .ghost {
@@ -97,16 +106,16 @@ export default {
   background: #c8ebfb;
 }
 
-.flex-container {
+.task-area .flex-container {
   display: flex;
 }
 
-.flex-item:nth-child(1) {
+.task-area .flex-item:nth-child(1) {
   flex-grow: 1;
   overflow: hidden;
 }
 
-.flex-item:nth-child(2) > i {
+.task-area .flex-item:nth-child(2) > i {
   font-size: 1.5rem;
 }
 </style>
