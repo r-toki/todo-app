@@ -5,12 +5,12 @@ Vue.use(Vuex);
 
 const state = {
   todoList: [
-    { title: 'Ishikawa', id: 1 },
-    { title: 'Kanagawa', id: 3 },
+    { id: 1, title: '掃除', done: false },
+    { id: 3, title: '犬の散歩', done: false },
   ],
   completedList: [
-    { title: 'Okayama', id: 2 },
-    { title: 'Tokyo', id: 4 },
+    { id: 2, title: '洗濯', done: false },
+    { id: 4, title: '筋トレ', done: false },
   ],
 };
 
@@ -27,6 +27,10 @@ const mutations = {
   // listName, idx | element
   addElement(state, { listName, idx, element }) {
     state[listName].splice(idx, 0, element);
+  },
+  // listName, idx | element
+  updateElement(state, { listName, idx, element }) {
+    state[listName][idx] = element;
   },
 };
 

@@ -19,15 +19,13 @@
       ghost-class="ghost"
     >
       <div class="list-group-item task-area" v-for="(task, idx) in vuexList" :key="task.id">
-        <div class="flex-container">
-          <div class="flex-item">
-            <input type="checkbox" />
-          </div>
-          <div class="flex-item">{{ task.title }}</div>
-          <div class="flex-item">
-            <i class="fa fa-times close" @click="removeTask(idx)"></i>
+        <div class="pretty p-default">
+          <input type="checkbox" v-model="task.done" @change="updateTask(idx, task)" />
+          <div class="state p-success">
+            <label>{{ task.title }}</label>
           </div>
         </div>
+        <i class="fa fa-times close" @click="removeTask(idx)"></i>
       </div>
     </draggable>
   </div>
@@ -70,9 +68,16 @@ export default {
       this.$store.commit('addElement', {
         listName: this.listName,
         idx: 0,
-        element: { title: value, id: new Date().getTime() },
+        element: { id: new Date().getTime(), title: value, done: false },
       });
       this.newTaskTitle = '';
+    },
+    updateTask(idx, task) {
+      this.$store.commit('updateElement', {
+        listName: this.listName,
+        idx: idx,
+        element: task,
+      });
     },
   },
 };
@@ -83,9 +88,6 @@ export default {
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.title-area {
 }
 
 .add-area {
@@ -112,18 +114,5 @@ export default {
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;
-}
-
-.task-area .flex-container {
-  display: flex;
-}
-
-.task-area .flex-item:nth-child(2) {
-  flex-grow: 1;
-  overflow: hidden;
-}
-
-.task-area .flex-item:nth-child(3) > i {
-  font-size: 1.5rem;
 }
 </style>
