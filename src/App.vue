@@ -1,22 +1,9 @@
 <template>
-  <div class="app-root container">
-    <div class="row">
-      <div class="col">
-        <DraggableList listName="todoList" shareLists="todo-completed"></DraggableList>
-      </div>
-      <div class="col">
-        <DraggableList listName="completedList" shareLists="todo-completed"></DraggableList>
-      </div>
-    </div>
-  </div>
+  <div class="app-root container">Hello World</div>
 </template>
 
 <script>
-import DraggableList from './DraggableList.vue';
-
-export default {
-  components: { DraggableList },
-};
+export default {};
 </script>
 
 <style>
@@ -31,9 +18,7 @@ body {
 </style>
 
 <style scoped>
-.app-root,
-.app-root .row,
-.app-root .row .col {
+.app-root {
   height: 100%;
 }
 
