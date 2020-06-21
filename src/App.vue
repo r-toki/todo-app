@@ -1,9 +1,14 @@
 <template>
-  <div class="app-root container">Hello World</div>
+  <div class="App-vue container">
+    <TodoList></TodoList>
+  </div>
 </template>
 
 <script>
-export default {};
+import TodoList from './TodoList.vue';
+export default {
+  components: { TodoList },
+};
 </script>
 
 <style>
@@ -18,11 +23,8 @@ body {
 </style>
 
 <style scoped>
-.app-root {
+.App-vue {
   height: 100%;
-}
-
-.app-root {
   max-width: 960px;
 }
 </style>
