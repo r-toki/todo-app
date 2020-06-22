@@ -1,13 +1,21 @@
 <template>
-  <div class="App-vue container">
-    <TodoList></TodoList>
+  <div class="app-vue container">
+    <div class="row">
+      <div class="col">
+        <TaskList taskState="todo"></TaskList>
+      </div>
+      <div class="col">
+        <TaskList taskState="done"></TaskList>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import TodoList from './TodoList.vue';
+import TaskList from './components/TaskList.vue';
+
 export default {
-  components: { TodoList },
+  components: { TaskList },
 };
 </script>
 
@@ -16,15 +24,15 @@ html,
 body {
   height: 100%;
 }
-
-body {
-  background-color: #f8f9fa !important;
-}
 </style>
 
 <style scoped>
-.App-vue {
+.app-vue {
   height: 100%;
-  max-width: 960px;
+}
+
+.app-vue > .row,
+.app-vue > .col {
+  height: 100%;
 }
 </style>
