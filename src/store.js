@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 const state = {
   todo: {
-    displayName: 'To do',
+    title: 'To do',
     taskList: [
       {
         createdTime: 0,
@@ -20,7 +20,7 @@ const state = {
     ],
   },
   done: {
-    displayName: 'Done',
+    title: 'Done',
     taskList: [
       {
         createdTime: 2,
@@ -34,22 +34,29 @@ const state = {
       },
     ],
   },
+  draggable: true,
 };
 
 const getters = {
   getTaskList(state) {
-    return function(taskState) {
-      return state[taskState].taskList;
+    return function(taskType) {
+      return state[taskType].taskList;
     };
   },
 };
 
 const mutations = {
-  updateTaskList(state, { taskState, updatedTaskList }) {
-    state[taskState].taskList = updatedTaskList;
+  updateTaskList(state, { taskType, newTaskList }) {
+    state[taskType].taskList = newTaskList;
   },
-  removeTask(state, { taskState, index }) {
-    state[taskState].taskList[(index, 1)];
+  removeTaskFromTaskList(state, { taskType, taskIndex }) {
+    state[taskType].taskList.splice(taskIndex, 1);
+  },
+  ableDrag(state) {
+    state.draggable = true;
+  },
+  disableDrag(state) {
+    state.draggable = false;
   },
 };
 

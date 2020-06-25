@@ -1,40 +1,31 @@
 <template>
-  <div class="task-item-vue">
-    <template v-if="!isEditing">
-      <h5>{{ task.title }}</h5>
-      <div class="footer">
-        <button class="btn btn-primary" @click="editTask()">
-          <i class="fa fa-edit"></i>
-        </button>
-        <button class="btn btn-danger" @click="removeTask()">
-          <i class="fa fa-trash"></i>
-        </button>
-      </div>
-    </template>
+  <div :class="{ draggable: true }">
+    <task-item-view
+      :task-type="taskType"
+      :task-index="taskIndex"
+      :task="task"
+      v-if="!isEditing"
+      @start-editing-task="isEditing = true"
+    />
+    <task-item-edit
+      :task-type="taskType"
+      :task-index="taskIndex"
+      :task="task"
+      v-if="isEditing"
+    />
   </div>
 </template>
 
 <script>
+import TaskItemView from './TaskItemView.vue';
+import TaskItemEdit from './TaskItemEdit.vue';
+
 export default {
-  props: ['task'],
+  props: ['taskType', 'taskIndex', 'task'],
+  components: { TaskItemView, TaskItemEdit },
   data() {
-    return {
-      isEditing: false,
-    };
+    return { isEditing: false };
   },
-  methods: {
-    removeTask() {
-      this.$emit('remove-task');
-    },
-    editTask() {
-      this.$emit('edit-task');
-    },
-  },
+  methods: {},
 };
 </script>
-
-<style scoped>
-.footer {
-  float: right;
-}
-</style>

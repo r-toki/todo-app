@@ -1,21 +1,19 @@
 <template>
-  <div class="app-vue container">
-    <div class="row">
-      <div class="col">
-        <TaskList taskState="todo"></TaskList>
-      </div>
-      <div class="col">
-        <TaskList taskState="done"></TaskList>
-      </div>
+  <div class="row">
+    <div class="col">
+      <task-list-draggable task-type="todo" />
+    </div>
+    <div class="col">
+      <task-list-draggable task-type="done" />
     </div>
   </div>
 </template>
 
 <script>
-import TaskList from './components/TaskList.vue';
+import TaskListDraggable from './components/TaskListDraggable.vue';
 
 export default {
-  components: { TaskList },
+  components: { TaskListDraggable },
 };
 </script>
 
@@ -27,12 +25,13 @@ body {
 </style>
 
 <style scoped>
-.app-vue {
+.row {
   height: 100%;
+  width: 960px;
+  margin: auto;
 }
 
-.app-vue > .row,
-.app-vue > .col {
+.col {
   height: 100%;
 }
 </style>
