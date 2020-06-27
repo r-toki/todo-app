@@ -34,34 +34,31 @@ const state = {
       },
     ],
   },
-  draggable: true,
-};
-
-const getters = {
-  getTaskList(state) {
-    return function(taskType) {
-      return state[taskType].taskList;
-    };
-  },
+  globalEditingFlag: false,
 };
 
 const mutations = {
   updateTaskList(state, { taskType, newTaskList }) {
     state[taskType].taskList = newTaskList;
   },
-  removeTaskFromTaskList(state, { taskType, taskIndex }) {
+  createTask(state, { taskType, newTask }) {
+    state[taskType].taskList.unshift(newTask);
+  },
+  deleteTask(state, { taskType, taskIndex }) {
     state[taskType].taskList.splice(taskIndex, 1);
   },
-  ableDrag(state) {
-    state.draggable = true;
+  updateTask(state, { taskType, taskIndex, updatedTask }) {
+    state[taskType].taskList[taskIndex] = updatedTask;
   },
-  disableDrag(state) {
-    state.draggable = false;
+  enableGlobalEditingFlag(state) {
+    state.globalEditingFlag = true;
+  },
+  disableGlobalEditingFlag(state) {
+    state.globalEditingFlag = false;
   },
 };
 
 export default new Vuex.Store({
   state,
-  getters,
   mutations,
 });

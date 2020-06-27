@@ -1,19 +1,19 @@
 <template>
   <div class="row">
     <div class="col">
-      <task-list-draggable task-type="todo" />
+      <task-kanban task-type="todo" />
     </div>
     <div class="col">
-      <task-list-draggable task-type="done" />
+      <task-kanban task-type="done" />
     </div>
   </div>
 </template>
 
 <script>
-import TaskListDraggable from './components/TaskListDraggable.vue';
+import TaskKanban from './components/TaskKanban.vue';
 
 export default {
-  components: { TaskListDraggable },
+  components: { TaskKanban },
 };
 </script>
 
@@ -22,12 +22,21 @@ html,
 body {
   height: 100%;
 }
+
+/* vuejs-datepiccker デフォルトの背景が灰色のため変更 */
+.vdp-datepicker .form-control {
+  background-color: #fff !important;
+}
+
+.vdp-datepicker__clear-button > .input-group-text {
+  background-color: #fff !important;
+}
 </style>
 
 <style scoped>
 .row {
   height: 100%;
-  width: 960px;
+  width: 800px;
   margin: auto;
 }
 

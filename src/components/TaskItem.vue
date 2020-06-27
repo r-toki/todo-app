@@ -1,17 +1,18 @@
 <template>
-  <div :class="{ draggable: true }">
+  <div>
     <task-item-view
       :task-type="taskType"
       :task-index="taskIndex"
       :task="task"
-      v-if="!isEditing"
-      @start-editing-task="isEditing = true"
+      v-if="!localEditingFlag"
+      @start-editing-task="startEditingTask()"
     />
     <task-item-edit
       :task-type="taskType"
       :task-index="taskIndex"
       :task="task"
-      v-if="isEditing"
+      v-if="localEditingFlag"
+      @end-editing-task="endEditingTask()"
     />
   </div>
 </template>
@@ -24,8 +25,17 @@ export default {
   props: ['taskType', 'taskIndex', 'task'],
   components: { TaskItemView, TaskItemEdit },
   data() {
-    return { isEditing: false };
+    return { localEditingFlag: false };
   },
-  methods: {},
+  methods: {
+    startEditingTask() {
+      this.localEditingFlag = true;
+      this.$store.commit('enableGlobalEditingFlag');
+    },
+    endEditingTask() {
+      this.localEditingFlag = false;
+      this.$store.commit('disableGlobalEditingFlag');
+    },
+  },
 };
 </script>

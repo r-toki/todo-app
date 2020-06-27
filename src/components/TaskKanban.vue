@@ -1,18 +1,18 @@
 <template>
   <div class="task-list-vue">
-    <h4>{{ this.taskListTitle }} : {{ this.taskCount }}</h4>
+    <h4>{{ this.kanbanName }} : {{ this.taskCount }}</h4>
     <draggable
       class="list-group"
       v-model="taskList"
       group="group"
       ghost-class="ghost"
-      draggable=".draggable"
+      handle=".handle"
     >
       <div
         class="list-group-item"
         v-for="(task, taskIndex) in taskList"
         :key="taskIndex"
-        :class="{ draggable: draggable }"
+        :class="{ handle: !globalEditingFlag }"
       >
         <task-item :task-type="taskType" :task-index="taskIndex" :task="task" />
       </div>
@@ -28,7 +28,10 @@ export default {
   props: ['taskType'],
   components: { draggable, TaskItem },
   computed: {
-    taskListTitle() {
+    globalEditingFlag() {
+      return this.$store.state.globalEditingFlag;
+    },
+    kanbanName() {
       return this.$store.state[this.taskType].title;
     },
     taskCount() {
@@ -44,9 +47,6 @@ export default {
           newTaskList: newTaskList,
         });
       },
-    },
-    draggable() {
-      return this.$store.state.draggable;
     },
   },
 };
