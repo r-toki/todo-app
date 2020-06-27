@@ -1,19 +1,19 @@
 <template>
-  <div class="row">
-    <div class="col">
-      <task-kanban task-type="todo" />
+  <div class="flex-container">
+    <div class="flex-item">
+      <task-list task-type="todo" />
     </div>
-    <div class="col">
-      <task-kanban task-type="done" />
+    <div class="flex-item">
+      <task-list task-type="done" />
     </div>
   </div>
 </template>
 
 <script>
-import TaskKanban from './components/TaskKanban.vue';
+import TaskList from './components/TaskList.vue';
 
 export default {
-  components: { TaskKanban },
+  components: { TaskList },
 };
 </script>
 
@@ -34,13 +34,16 @@ body {
 </style>
 
 <style scoped>
-.row {
+.flex-container {
   height: 100%;
-  width: 800px;
-  margin: auto;
+  display: flex;
+  justify-content: center;
 }
 
-.col {
+.flex-item {
   height: 100%;
+  width: 400px;
+  margin: 0 10px;
+  flex-shrink: 0;
 }
 </style>

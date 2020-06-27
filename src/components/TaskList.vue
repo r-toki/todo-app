@@ -1,6 +1,13 @@
 <template>
   <div class="task-list-vue">
-    <h4>{{ this.kanbanName }} : {{ this.taskCount }}</h4>
+    <div class="flex-container">
+      <h4>{{ this.title }} : {{ this.taskCount }}</h4>
+      <div class="pull-right">
+        <button class="btn btn-light">
+          <i class="fa fa-plus"></i>
+        </button>
+      </div>
+    </div>
     <draggable
       class="list-group"
       v-model="taskList"
@@ -31,7 +38,7 @@ export default {
     globalEditingFlag() {
       return this.$store.state.globalEditingFlag;
     },
-    kanbanName() {
+    title() {
       return this.$store.state[this.taskType].title;
     },
     taskCount() {
@@ -59,6 +66,17 @@ export default {
   background-color: #f8f9fa;
   display: flex;
   flex-direction: column;
+}
+
+.flex-container {
+  display: flex;
+  padding: 0.75rem 1.25rem;
+  /* border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem; */
+}
+
+.flex-container > h4 {
+  flex-grow: 1;
 }
 
 .list-group {

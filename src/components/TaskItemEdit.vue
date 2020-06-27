@@ -61,19 +61,6 @@ export default {
     customFormatter(date) {
       return moment(date).format('yyyy/MM/DD');
     },
-    customDatapickerStyle() {
-      const selector = '.vdp-datepicker__clear-button > .input-group-text';
-      const clearButton = document.querySelector(selector);
-      console.log(clearButton);
-      const div = document.querySelector('div');
-      console.log(div);
-    },
-  },
-  created() {
-    this.customDatapickerStyle();
-  },
-  updated() {
-    this.customDatapickerStyle();
   },
 };
 </script>
@@ -89,6 +76,6 @@ export default {
 }
 
 .flex-item {
-  width: 47.5%;
+  width: 48%;
 }
 </style>
