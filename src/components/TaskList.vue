@@ -1,15 +1,7 @@
 <template>
-  <div class="task-list-vue">
-    <div class="flex-container">
-      <h4>{{ this.title }} : {{ this.taskCount }}</h4>
-      <div class="pull-right">
-        <button class="btn btn-light">
-          <i class="fa fa-plus"></i>
-        </button>
-      </div>
-    </div>
+  <div class="task-list">
     <draggable
-      class="list-group"
+      class="list-group draggable"
       v-model="taskList"
       group="group"
       ghost-class="ghost"
@@ -19,7 +11,7 @@
         class="list-group-item"
         v-for="(task, taskIndex) in taskList"
         :key="taskIndex"
-        :class="{ handle: !globalEditingFlag }"
+        :class="{ handle: operationFlag }"
       >
         <task-item :task-type="taskType" :task-index="taskIndex" :task="task" />
       </div>
@@ -30,19 +22,17 @@
 <script>
 import draggable from 'vuedraggable';
 import TaskItem from './TaskItem.vue';
+import TaskItemCreate from './TaskItemCreate.vue';
 
 export default {
   props: ['taskType'],
   components: { draggable, TaskItem },
+  data() {
+    return { isCreating: false };
+  },
   computed: {
-    globalEditingFlag() {
-      return this.$store.state.globalEditingFlag;
-    },
-    title() {
-      return this.$store.state[this.taskType].title;
-    },
-    taskCount() {
-      return this.$store.state[this.taskType].taskList.length;
+    operationFlag() {
+      return this.$store.state.operationFlag;
     },
     taskList: {
       get() {
@@ -60,31 +50,12 @@ export default {
 </script>
 
 <style scoped>
-.task-list-vue {
+.draggable {
   height: 100%;
-  padding: 0 20px;
-  background-color: #f8f9fa;
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-container {
-  display: flex;
-  padding: 0.75rem 1.25rem;
-  /* border: 1px solid rgba(0, 0, 0, 0.125);
-  border-radius: 0.25rem; */
-}
-
-.flex-container > h4 {
-  flex-grow: 1;
-}
-
-.list-group {
-  flex-grow: 1;
 }
 
 .list-group-item {
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
   border-radius: inherit !important;
   border-width: 1px !important;
 }

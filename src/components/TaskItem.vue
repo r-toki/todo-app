@@ -1,18 +1,17 @@
 <template>
   <div>
     <task-item-view
-      :task-type="taskType"
-      :task-index="taskIndex"
       :task="task"
-      v-if="!localEditingFlag"
-      @start-editing-task="startEditingTask()"
+      v-if="!isEditing"
+      @start-editing="startEditing"
+      @delete-task="deleteTask"
     />
     <task-item-edit
-      :task-type="taskType"
-      :task-index="taskIndex"
       :task="task"
-      v-if="localEditingFlag"
-      @end-editing-task="endEditingTask()"
+      v-if="isEditing"
+      @save-editing="saveEditing"
+      @cancel-editing="cancelEditing"
+      @end-editing="endEditing"
     />
   </div>
 </template>
@@ -25,16 +24,42 @@ export default {
   props: ['taskType', 'taskIndex', 'task'],
   components: { TaskItemView, TaskItemEdit },
   data() {
-    return { localEditingFlag: false };
+    return { isEditing: false };
   },
   methods: {
-    startEditingTask() {
-      this.localEditingFlag = true;
-      this.$store.commit('enableGlobalEditingFlag');
+    startEditing() {
+      if (!this.$store.state.operationFlag) {
+        return;
+      }
+      this.isEditing = true;
+      this.$store.commit('disableOperation');
     },
-    endEditingTask() {
-      this.localEditingFlag = false;
-      this.$store.commit('disableGlobalEditingFlag');
+    endEditing() {
+      this.isEditing = false;
+      this.$store.commit('enableOperation');
+    },
+    saveEditing() {
+      this.$store.commit('updateTask', {
+        taskType: this.taskType,
+        taskIndex: this.taskIndex,
+        updatedTask: this.task,
+      });
+    },
+    cancelEditing({ taskBeforeEditing }) {
+      this.$store.commit('updateTask', {
+        taskType: this.taskType,
+        taskIndex: this.taskIndex,
+        updatedTask: taskBeforeEditing,
+      });
+    },
+    deleteTask() {
+      if (!this.$store.state.operationFlag) {
+        return;
+      }
+      this.$store.commit('deleteTask', {
+        taskType: this.taskType,
+        taskIndex: this.taskIndex,
+      });
     },
   },
 };

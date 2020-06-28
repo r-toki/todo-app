@@ -1,30 +1,35 @@
 <template>
   <div>
     <div class="form-group">
-      <label>Title</label>
-      <input v-model="task.title" type="text" class="form-control" />
+      <input
+        v-model="task.title"
+        type="text"
+        placeholder="Title"
+        class="form-control"
+      />
     </div>
-    <label>Deadline</label>
     <date-picker
       v-model="task.deadline"
       :bootstrap-styling="true"
-      :input-class="`date-picker-input`"
+      :format="customFormatter"
+      placeholder="Deadline"
+      :clear-button="true"
+      clear-button-icon="fa fa-times"
     />
-    <slot name="footer"></slot>
   </div>
 </template>
 
 <script>
 import DatePicker from 'vuejs-datepicker';
+import moment from 'moment';
 
 export default {
   props: ['task'],
   components: { DatePicker },
+  methods: {
+    customFormatter(date) {
+      return moment(date).format('yyyy/MM/DD');
+    },
+  },
 };
 </script>
-
-<style module>
-.date-picker-input {
-  background-color: white !important;
-}
-</style>

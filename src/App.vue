@@ -1,19 +1,22 @@
 <template>
-  <div class="flex-container">
-    <div class="flex-item">
-      <task-list task-type="todo" />
+  <div class="kanban">
+    <div class="kanban-column">
+      <task-list-title task-type="todo" class="task-list-title" />
+      <task-list task-type="todo" class="task-list" />
     </div>
-    <div class="flex-item">
-      <task-list task-type="done" />
+    <div class="kanban-column">
+      <task-list-title task-type="done" class="task-list-title" />
+      <task-list task-type="done" class="task-list" />
     </div>
   </div>
 </template>
 
 <script>
+import TaskListTitle from './components/TaskListTitle.vue';
 import TaskList from './components/TaskList.vue';
 
 export default {
-  components: { TaskList },
+  components: { TaskListTitle, TaskList },
 };
 </script>
 
@@ -34,16 +37,28 @@ body {
 </style>
 
 <style scoped>
-.flex-container {
+.kanban {
   height: 100%;
   display: flex;
   justify-content: center;
 }
 
-.flex-item {
+.kanban-column {
   height: 100%;
   width: 400px;
-  margin: 0 10px;
   flex-shrink: 0;
+  margin: 0 10px;
+  padding: 0 20px;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-column > .task-list {
+  flex-grow: 1;
+}
+
+.task-list-title {
+  margin-bottom: 0.5rem;
 }
 </style>

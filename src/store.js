@@ -34,7 +34,7 @@ const state = {
       },
     ],
   },
-  globalEditingFlag: false,
+  operationFlag: true,
 };
 
 const mutations = {
@@ -50,11 +50,11 @@ const mutations = {
   updateTask(state, { taskType, taskIndex, updatedTask }) {
     state[taskType].taskList[taskIndex] = updatedTask;
   },
-  enableGlobalEditingFlag(state) {
-    state.globalEditingFlag = true;
+  enableOperation(state) {
+    state.operationFlag = true;
   },
-  disableGlobalEditingFlag(state) {
-    state.globalEditingFlag = false;
+  disableOperation(state) {
+    state.operationFlag = false;
   },
 };
 

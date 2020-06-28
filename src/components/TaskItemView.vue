@@ -4,7 +4,7 @@
     <h6 class="text-muted">{{ deadline }}</h6>
     <div class="clearfix">
       <div class="pull-right">
-        <button class="btn btn-outline-success" @click="startEditingTask()">
+        <button class="btn btn-outline-success" @click="startEditing()">
           <i class="fa fa-edit"></i>
         </button>
         <button class="btn btn-outline-secondary" @click="deleteTask()">
@@ -19,7 +19,7 @@
 import moment from 'moment';
 
 export default {
-  props: ['taskType', 'taskIndex', 'task'],
+  props: ['task'],
   computed: {
     deadline() {
       if (!this.task.deadline) {
@@ -30,20 +30,11 @@ export default {
     },
   },
   methods: {
-    startEditingTask() {
-      if (this.$store.state.globalEditingFlag) {
-        return;
-      }
-      this.$emit('start-editing-task');
+    startEditing() {
+      this.$emit('start-editing');
     },
     deleteTask() {
-      if (this.$store.state.globalEditingFlag) {
-        return;
-      }
-      this.$store.commit('deleteTask', {
-        taskType: this.taskType,
-        taskIndex: this.taskIndex,
-      });
+      this.$emit('delete-task');
     },
   },
 };
