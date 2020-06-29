@@ -52,6 +52,11 @@ export default {
 </script>
 
 <style scoped>
+.task-list {
+  padding: 0 20px;
+  overflow: auto;
+}
+
 .draggable {
   height: 100%;
 }
@@ -60,6 +65,7 @@ export default {
   margin-bottom: 0.5rem;
   border-radius: inherit !important;
   border-width: 1px !important;
+  width: 300px;
 }
 
 .ghost {

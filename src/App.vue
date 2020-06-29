@@ -30,10 +30,6 @@ body {
 .vdp-datepicker .form-control {
   background-color: #fff !important;
 }
-
-.vdp-datepicker__clear-button > .input-group-text {
-  background-color: #fff !important;
-}
 </style>
 
 <style scoped>
@@ -48,13 +44,12 @@ body {
   width: 340px;
   flex-shrink: 0;
   margin: 0 10px;
-  padding: 0 20px;
   background-color: #f8f9fa;
   display: flex;
   flex-direction: column;
 }
 
-.kanban-column > .task-list {
+.task-list {
   flex-grow: 1;
 }
 
