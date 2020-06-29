@@ -1,20 +1,14 @@
 <template>
   <div>
     <div class="form-group">
-      <input
-        v-model="task.title"
-        type="text"
-        placeholder="Title"
-        class="form-control"
-      />
+      <input v-model="task.title" type="text" placeholder="Title" class="form-control" />
     </div>
     <date-picker
       v-model="task.deadline"
       :bootstrap-styling="true"
       :format="customFormatter"
       placeholder="Deadline"
-      :clear-button="true"
-      clear-button-icon="fa fa-times"
+      :typeable="true"
     />
   </div>
 </template>

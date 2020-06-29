@@ -6,40 +6,18 @@ Vue.use(Vuex);
 const state = {
   todo: {
     title: 'To do',
-    taskList: [
-      {
-        createdTime: 0,
-        title: 'Clean the room',
-        deadline: null,
-      },
-      {
-        createdTime: 1,
-        title: 'Exercise',
-        deadline: null,
-      },
-    ],
+    taskList: JSON.parse(localStorage.getItem('todo')) || [],
   },
   done: {
     title: 'Done',
-    taskList: [
-      {
-        createdTime: 2,
-        title: 'Read Readable Code',
-        deadline: null,
-      },
-      {
-        createdTime: 3,
-        title: 'Wash the dishes',
-        deadline: null,
-      },
-    ],
+    taskList: JSON.parse(localStorage.getItem('done')) || [],
   },
-  operationFlag: true,
+  isOperational: true,
 };
 
 const mutations = {
-  updateTaskList(state, { taskType, newTaskList }) {
-    state[taskType].taskList = newTaskList;
+  updateTaskList(state, { taskType, updatedTaskList }) {
+    state[taskType].taskList = updatedTaskList;
   },
   createTask(state, { taskType, newTask }) {
     state[taskType].taskList.unshift(newTask);
@@ -51,10 +29,10 @@ const mutations = {
     state[taskType].taskList[taskIndex] = updatedTask;
   },
   enableOperation(state) {
-    state.operationFlag = true;
+    state.isOperational = true;
   },
   disableOperation(state) {
-    state.operationFlag = false;
+    state.isOperational = false;
   },
 };
 

@@ -19,6 +19,7 @@
 <script>
 import TaskItemView from './TaskItemView.vue';
 import TaskItemEdit from './TaskItemEdit.vue';
+import { setTaskListToLocalStorage } from '../utils/helper.js';
 
 export default {
   props: ['taskType', 'taskIndex', 'task'],
@@ -28,7 +29,7 @@ export default {
   },
   methods: {
     startEditing() {
-      if (!this.$store.state.operationFlag) {
+      if (!this.$store.state.isOperational) {
         return;
       }
       this.isEditing = true;
@@ -44,6 +45,7 @@ export default {
         taskIndex: this.taskIndex,
         updatedTask: this.task,
       });
+      setTaskListToLocalStorage(this.$store.state, this.taskType);
     },
     cancelEditing({ taskBeforeEditing }) {
       this.$store.commit('updateTask', {
@@ -53,13 +55,14 @@ export default {
       });
     },
     deleteTask() {
-      if (!this.$store.state.operationFlag) {
+      if (!this.$store.state.isOperational) {
         return;
       }
       this.$store.commit('deleteTask', {
         taskType: this.taskType,
         taskIndex: this.taskIndex,
       });
+      setTaskListToLocalStorage(this.$store.state, this.taskType);
     },
   },
 };

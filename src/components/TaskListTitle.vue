@@ -14,6 +14,7 @@
 
 <script>
 import TaskItemCreate from './TaskItemCreate.vue';
+import { setTaskListToLocalStorage } from '../utils/helper.js';
 
 export default {
   props: ['taskType'],
@@ -28,12 +29,12 @@ export default {
       return this.$store.state[this.taskType].title;
     },
     taskCount() {
-      return this.$store.state[this.taskType].length;
+      return this.$store.state[this.taskType].taskList.length;
     },
   },
   methods: {
     startCreating() {
-      if (!this.$store.state.operationFlag) {
+      if (!this.$store.state.isOperational) {
         return;
       }
       this.isCreating = true;
@@ -48,6 +49,7 @@ export default {
         taskType: this.taskType,
         newTask: newTask,
       });
+      setTaskListToLocalStorage(this.$store.state, this.taskType);
     },
   },
 };
@@ -56,7 +58,7 @@ export default {
 <style scoped>
 .flex-container {
   display: flex;
-  padding: 0 1.25rem;
+  padding: 0.75rem 1.25rem;
 }
 
 .flex-container > h4 {

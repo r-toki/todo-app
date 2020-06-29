@@ -11,7 +11,7 @@
         class="list-group-item"
         v-for="(task, taskIndex) in taskList"
         :key="taskIndex"
-        :class="{ handle: operationFlag }"
+        :class="{ handle: isOperational }"
       >
         <task-item :task-type="taskType" :task-index="taskIndex" :task="task" />
       </div>
@@ -23,6 +23,7 @@
 import draggable from 'vuedraggable';
 import TaskItem from './TaskItem.vue';
 import TaskItemCreate from './TaskItemCreate.vue';
+import { setTaskListToLocalStorage } from '../utils/helper.js';
 
 export default {
   props: ['taskType'],
@@ -31,18 +32,19 @@ export default {
     return { isCreating: false };
   },
   computed: {
-    operationFlag() {
-      return this.$store.state.operationFlag;
+    isOperational() {
+      return this.$store.state.isOperational;
     },
     taskList: {
       get() {
         return this.$store.state[this.taskType].taskList;
       },
-      set(newTaskList) {
+      set(updatedTaskList) {
         this.$store.commit('updateTaskList', {
           taskType: this.taskType,
-          newTaskList: newTaskList,
+          updatedTaskList: updatedTaskList,
         });
+        setTaskListToLocalStorage(this.$store.state, this.taskType);
       },
     },
   },

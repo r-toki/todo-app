@@ -45,7 +45,7 @@ body {
 
 .kanban-column {
   height: 100%;
-  width: 400px;
+  width: 340px;
   flex-shrink: 0;
   margin: 0 10px;
   padding: 0 20px;
