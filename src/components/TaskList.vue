@@ -6,6 +6,8 @@
       group="group"
       ghost-class="ghost"
       handle=".handle"
+      :scroll-sensitivity="200"
+      :force-fallback="true"
     >
       <div
         class="list-group-item"
@@ -52,11 +54,6 @@ export default {
 </script>
 
 <style scoped>
-.task-list {
-  padding: 0 20px;
-  overflow: auto;
-}
-
 .draggable {
   height: 100%;
 }

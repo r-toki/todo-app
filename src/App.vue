@@ -49,11 +49,17 @@ body {
   flex-direction: column;
 }
 
+.kanban-column > * {
+  padding: 0 20px;
+  width: 340px;
+}
+
 .task-list {
   flex-grow: 1;
+  overflow: auto;
 }
 
 .task-list-title {
-  margin-bottom: 0.5rem;
+  margin-bottom: 20px;
 }
 </style>
