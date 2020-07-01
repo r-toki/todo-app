@@ -8,7 +8,12 @@
         </button>
       </div>
     </div>
-    <task-item-create v-if="isCreating" @end-creating="endCreating" @create-task="createTask" />
+    <task-item-create
+      v-if="isCreating"
+      @end-creating="endCreating"
+      @create-task="createTask"
+      class="task-item-create"
+    />
   </div>
 </template>
 
@@ -63,5 +68,9 @@ export default {
 
 .flex-container > h4 {
   flex-grow: 1;
+}
+
+.task-item-create {
+  margin-bottom: 0.5rem;
 }
 </style>

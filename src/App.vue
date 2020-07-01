@@ -58,8 +58,4 @@ body {
   flex-grow: 1;
   overflow: auto;
 }
-
-.task-list-title {
-  margin-bottom: 20px;
-}
 </style>
