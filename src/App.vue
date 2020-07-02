@@ -1,21 +1,22 @@
 <template>
-  <div class="app-root container">
-    <div class="row">
-      <div class="col">
-        <DraggableList listName="todoList" shareLists="todo-completed"></DraggableList>
-      </div>
-      <div class="col">
-        <DraggableList listName="completedList" shareLists="todo-completed"></DraggableList>
-      </div>
+  <div class="kanban">
+    <div class="kanban-column">
+      <task-list-title task-type="todo" class="task-list-title" />
+      <task-list task-type="todo" class="task-list" />
+    </div>
+    <div class="kanban-column">
+      <task-list-title task-type="done" class="task-list-title" />
+      <task-list task-type="done" class="task-list" />
     </div>
   </div>
 </template>
 
 <script>
-import DraggableList from './DraggableList.vue';
+import TaskListTitle from './components/TaskListTitle.vue';
+import TaskList from './components/TaskList.vue';
 
 export default {
-  components: { DraggableList },
+  components: { TaskListTitle, TaskList },
 };
 </script>
 
@@ -25,19 +26,36 @@ body {
   height: 100%;
 }
 
-body {
-  background-color: #f8f9fa !important;
+/* vuejs-datepiccker デフォルトの背景が灰色のため変更 */
+.vdp-datepicker .form-control {
+  background-color: #fff !important;
 }
 </style>
 
 <style scoped>
-.app-root,
-.app-root .row,
-.app-root .row .col {
+.kanban {
   height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.app-root {
-  max-width: 960px;
+.kanban-column {
+  height: 100%;
+  width: 340px;
+  flex-shrink: 0;
+  margin: 0 10px;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+}
+
+.kanban-column > * {
+  padding: 0 20px;
+  width: 340px;
+}
+
+.task-list {
+  flex-grow: 1;
+  overflow: auto;
 }
 </style>

@@ -4,33 +4,35 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 const state = {
-  todoList: [
-    { id: 1, title: '掃除', done: false },
-    { id: 3, title: '犬の散歩', done: false },
-  ],
-  completedList: [
-    { id: 2, title: '洗濯', done: false },
-    { id: 4, title: '筋トレ', done: false },
-  ],
+  todo: {
+    title: 'To do',
+    taskList: JSON.parse(localStorage.getItem('todo')) || [],
+  },
+  done: {
+    title: 'Done',
+    taskList: JSON.parse(localStorage.getItem('done')) || [],
+  },
+  isOperational: true,
 };
 
 const mutations = {
-  // for specify | for update
-  // listName | list
-  setList(state, { listName, list }) {
-    state[listName] = list;
+  updateTaskList(state, { taskType, updatedTaskList }) {
+    state[taskType].taskList = updatedTaskList;
   },
-  // listName, idx |
-  removeElement(state, { listName, idx }) {
-    state[listName].splice(idx, 1);
+  createTask(state, { taskType, newTask }) {
+    state[taskType].taskList.unshift(newTask);
   },
-  // listName, idx | element
-  addElement(state, { listName, idx, element }) {
-    state[listName].splice(idx, 0, element);
+  deleteTask(state, { taskType, taskIndex }) {
+    state[taskType].taskList.splice(taskIndex, 1);
   },
-  // listName, idx | element
-  updateElement(state, { listName, idx, element }) {
-    state[listName][idx] = element;
+  updateTask(state, { taskType, taskIndex, updatedTask }) {
+    state[taskType].taskList[taskIndex] = updatedTask;
+  },
+  enableOperation(state) {
+    state.isOperational = true;
+  },
+  disableOperation(state) {
+    state.isOperational = false;
   },
 };
 

@@ -1,6 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
-// const webpack = require('webpack');
+const webpack = require('webpack');
 
 module.exports = {
   entry: './src/main.js',
@@ -18,13 +18,13 @@ module.exports = {
   },
   devServer: {
     open: 'Google Chrome',
-    // hot: true,
+    hot: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
     new VueLoaderPlugin(),
-    // new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
   ],
 };
